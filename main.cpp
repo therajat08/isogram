@@ -1,46 +1,66 @@
+/*Given a string S of lowercase aplhabets, check if it is isogram or not. An Isogram is a string in which no letter occurs more than once.
+
+Input Format:
+The first line of input contains an integer T denoting the number of test cases. T testcases follow. Each test case consist of one string in 'lowercase' only, in a separate line.
+
+Output Format:
+For each testcase, in a new line, Print 1 if string is Isogram else print 0.
+
+Your Task:
+This is a function problem. You only need to complete the function isIsogram() that takes string as parameter and returns either true or false.
+
+Constraints:
+1 <= T <= 100
+1 <= |S| <= 103
+
+Example:
+Input:
+2
+machine
+geeks
+Output:
+1
+0
+
+Explanation:
+Testcase 2: geeks is not an isogram as 'e' appears twice. Hence we print 0.
+*/
 #include <bits/stdc++.h>
 
 using namespace std;
+bool isIsogram(string s);
 
-vector<int> res;
-void check()
-{
-  vector<string> str;
-  map<string,int> occ;
-  string in;
-  while(in!="\n")
-  {
-    cin >> in;
-    str.push_back(in);
-    occ[in]++;
-  }
-  for(int i=0;i<str.size();i++)
-  {
-    if(occ[str[i]]>1)
-    {
-      break;
-      res.push_back(0);
-      return;
-    }
-  }
-  res.push_back(1);
-  return;
-}
 int main()
 {
-
-  int n;
-
-  cin >> n;
-
-  for(int i=0;i<n;i++)
+  int t;
+  cin >> t;
+  while(t--)
   {
-    check();
-
-  }
-  for(int i=0;i<res.size();i++)
-  {
-    cout << res[i]<<endl;
+    string s;
+    cin >> s;
+    cout << isIsogram(s)<<endl;
   }
   return 0;
+}
+bool isIsogram(string s)
+{
+    int hash[26]={0};
+    
+    // iterating through the characters
+    for(int i=0;i<s.length();i++)
+    {
+        // increment the count of character in hash
+        hash[s[i]-'a']++;
+        
+        // if count of any character is greater than 1,
+        // then string is not isogram, return false
+        if(hash[s[i]-'a']>1)
+        {
+            return false;
+            
+        
+        }
+    }
+    
+    return true;
 }
